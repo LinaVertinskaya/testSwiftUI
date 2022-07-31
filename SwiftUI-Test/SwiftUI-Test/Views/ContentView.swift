@@ -46,6 +46,34 @@ struct ContentView: View {
 
                 .navigationBarTitle("\(channelData.channelName)")
         }
+        CellView()
+    }
+}
+
+struct CircleShadow: ViewModifier {
+    let shadowColor: Color
+    let shadowRadius: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .background(Circle()
+                .fill(Color.white)
+                .shadow(color: shadowColor, radius: shadowRadius))
+    }
+}
+
+struct CellView: View {
+    var body: some View {
+        VStack {
+            Text("my bird is flying south")
+            Image("bird")
+                .resizable()
+                .frame(width: 80, height: 80)
+                .modifier(CircleShadow(shadowColor: .orange, shadowRadius: 4))
+            Text("my bird will return in the spring")
+        }
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
